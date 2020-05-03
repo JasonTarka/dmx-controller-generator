@@ -38,6 +38,14 @@
     <Compile Include="SceneBank.cs" />
     <Compile Include="ProFileHandler.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Fixtures\IFixture.cs" />
+    <Compile Include="Fixtures\ColourCodes.cs" />
+    <Compile Include="Fixtures\AdjMegaPar.cs" />
+    <Compile Include="Fixtures\SilverParCan.cs" />
+    <Compile Include="Fixtures\Jellyfish.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fixtures\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

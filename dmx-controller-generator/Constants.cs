@@ -11,5 +11,10 @@ namespace dmxcontrollergenerator {
 		public const byte NumChannels = 16;
 		public const byte NumScenes = 8;
 		public const byte NumBanks = 30;
+
+		/// <summary>
+		/// Maximum value for a channel.
+		/// </summary>
+		public const byte MaxVal = 0xFF;
 	}
 }
