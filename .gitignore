@@ -1,3 +1,5 @@
 **/UserPrefs.xml
 packages/
+obj/
+bin/
 

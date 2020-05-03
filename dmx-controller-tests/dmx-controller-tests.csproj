@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA4D56D5-B53D-4FE9-B766-C08ED3F4B8E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>dmxcontrollertests</RootNamespace>
+    <AssemblyName>dmx-controller-tests</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SceneBankTests.cs" />
+    <Compile Include="ProFileHandlerTests.cs">
+      <LogicalName>dmxcontrollertests.ProFileHandlerTests.cs</LogicalName>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dmx-controller-generator\dmx-controller-generator.csproj">
+      <Project>{F776CC4A-96CA-4068-87FB-43BA232E662E}</Project>
+      <Name>dmx-controller-generator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="testData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="testData\sixChannelScene">
+      <LogicalName>testData.sixChannelScene</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testData\inputFile.PRO">
+      <LogicalName>testData.inputFile.PRO</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testData\expectedOutput.PRO">
+      <LogicalName>testData.expectedOutput.PRO</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
