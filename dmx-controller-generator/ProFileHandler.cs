@@ -14,9 +14,8 @@ namespace dmxcontrollergenerator {
 		) {
 			byte[] output;
 
-			using(BinaryReader reader = new BinaryReader(inputFile)) {
-				output = reader.ReadBytes(Constants.ProFileLength);
-			}
+			BinaryReader reader = new BinaryReader(inputFile);
+			output = reader.ReadBytes(Constants.ProFileLength);
 
 			foreach(SceneBank sbank in sceneBanks) {
 				WriteSceneBank(sbank, output);

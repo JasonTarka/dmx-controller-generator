@@ -43,6 +43,7 @@
     <Compile Include="Fixtures\AdjMegaPar.cs" />
     <Compile Include="Fixtures\SilverParCan.cs" />
     <Compile Include="Fixtures\Jellyfish.cs" />
+    <Compile Include="Processor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fixtures\" />

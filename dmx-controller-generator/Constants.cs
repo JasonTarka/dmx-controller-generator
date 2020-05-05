@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Fixtures;
 namespace dmxcontrollergenerator {
 	public static class Constants {
 		/// <summary>
@@ -16,5 +18,11 @@ namespace dmxcontrollergenerator {
 		/// Maximum value for a channel.
 		/// </summary>
 		public const byte MaxVal = 0xFF;
+
+		public static readonly IEnumerable<IFixture> Fixtures = new IFixture[] {
+				new AdjMegaPar(),
+				new SilverParCan(),
+				new Jellyfish()
+			};
 	}
 }

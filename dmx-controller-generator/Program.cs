@@ -3,14 +3,28 @@ using System.Reflection;
 
 namespace dmxcontrollergenerator {
 	class MainClass {
-		public static void Main( string[] args ) {
-			if(args.Length < 2) {
-				throw new TargetParameterCountException("You must specify an input file, and a *.PRO file to modify.");
+		private const int RequiredArgs = 3;
+
+		public static int Main( string[] args ) {
+			if(args.Length < RequiredArgs) {
+				ShowUsage();
+				return -1;
 			}
 
-			string inputFile = args[0],
-				outputFile = args[1];
+			string fixtureName = args[0],
+				settingsFile = args[1],
+				proFile = args[2];
 
+			using(Processor processor = new Processor(fixtureName, settingsFile, proFile)) {
+				processor.ProcessFiles();
+			}
+
+			return 0;
+		}
+
+		private static void ShowUsage() {
+			Console.WriteLine("Expected usage:");
+			Console.WriteLine("dmx-controller-generator {fixture code} {program file} {PRO file}");
 		}
 	}
 }

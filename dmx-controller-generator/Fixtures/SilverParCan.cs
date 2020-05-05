@@ -16,10 +16,15 @@ namespace Fixtures {
 
 		public string FixtureName => "Silver";
 
-		byte[] IFixture.GetChannelValues(string fixtureName, ColourCode colour) {
-			if(fixtureName != FixtureName) return null;
+		bool IFixture.TryGetChannelValues(
+			string fixtureName,
+			ColourCode colour,
+			out byte[] channels
+		) {
+			channels = null;
+			if(fixtureName != FixtureName) return false;
 
-			byte[] channels = new byte[Constants.NumChannels + 1];
+			channels = new byte[Constants.NumChannels + 1];
 			byte on = Constants.MaxVal;
 
 			// Values that are needed in almost every case.
@@ -61,7 +66,8 @@ namespace Fixtures {
 			byte[] corrected = new byte[Constants.NumChannels];
 			Array.Copy(channels, 1, corrected, 0, corrected.Length);
 
-			return channels;
+			channels = corrected;
+			return true;
 		}
 	}
 }

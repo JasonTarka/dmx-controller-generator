@@ -14,6 +14,6 @@ namespace Fixtures {
 		/// </returns>
 		/// <param name="fixtureName">Fixture name.</param>
 		/// <param name="colour">Colour code.</param>
-		byte[] GetChannelValues(string fixtureName, ColourCode colour);
+		bool TryGetChannelValues(string fixtureName, ColourCode colour, out byte[] channels);
 	}
 }
