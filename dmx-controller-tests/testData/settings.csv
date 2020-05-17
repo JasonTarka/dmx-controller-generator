@@ -1,0 +1,7 @@
+﻿Scene,Bank,adjMegaPar,adjMegaPar,Silver,Jellyfish
+1,1,Red,Green,Blue,SoundActive
+1,9,Green,Red,Green,Off
+
+# Using 5 to show that it's not going in any particular order
+7,5,SoundActive|12,SoundActive|8,Orange,SoundActive
+7,10,SoundActive|5,SoundActive|8,Aqua,SoundActive

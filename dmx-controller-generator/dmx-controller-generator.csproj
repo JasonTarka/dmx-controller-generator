@@ -44,6 +44,7 @@
     <Compile Include="Fixtures\SilverParCan.cs" />
     <Compile Include="Fixtures\Jellyfish.cs" />
     <Compile Include="Processor.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fixtures\" />

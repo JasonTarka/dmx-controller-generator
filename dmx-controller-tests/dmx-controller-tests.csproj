@@ -36,6 +36,7 @@
     <Compile Include="ProFileHandlerTests.cs">
       <LogicalName>dmxcontrollertests.ProFileHandlerTests.cs</LogicalName>
     </Compile>
+    <Compile Include="SettingsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dmx-controller-generator\dmx-controller-generator.csproj">
@@ -55,6 +56,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="testData\expectedOutput.PRO">
       <LogicalName>testData.expectedOutput.PRO</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testData\settings.csv">
+      <LogicalName>testData.settings.csv</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

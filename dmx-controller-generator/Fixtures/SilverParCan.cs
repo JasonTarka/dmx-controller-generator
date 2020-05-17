@@ -16,16 +16,19 @@ namespace Fixtures {
 
 		public string FixtureName => "Silver";
 
-		bool IFixture.TryGetChannelValues(
-			string fixtureName,
-			ColourCode colour,
-			out byte[] channels
-		) {
-			channels = null;
-			if(fixtureName != FixtureName) return false;
+		bool IFixture.TryGetFixture(string fixtureName, out IFixture fixture) {
+			fixture = fixtureName == FixtureName ? this : null;
+			return fixture != null;
+		}
 
-			channels = new byte[Constants.NumChannels + 1];
-			byte on = Constants.MaxVal;
+		byte[] IFixture.GetChannelValues(
+			ColourCode colour,
+			string[] settings
+		) {
+			// Create with +1 so the channel numberss in code match
+			// what you'd use on a DMX controller. Trim the array later.
+			byte[] channels = new byte[Constants.NumChannels + 1];
+			const byte on = Constants.MaxVal;
 
 			// Values that are needed in almost every case.
 			channels[Dimmer] = on; // leave it always on, even when dark
@@ -66,8 +69,7 @@ namespace Fixtures {
 			byte[] corrected = new byte[Constants.NumChannels];
 			Array.Copy(channels, 1, corrected, 0, corrected.Length);
 
-			channels = corrected;
-			return true;
+			return corrected;
 		}
 	}
 }

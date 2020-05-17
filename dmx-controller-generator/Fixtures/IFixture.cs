@@ -4,16 +4,19 @@ namespace Fixtures {
 
 		string FixtureName { get; }
 
+		bool TryGetFixture(string fixtureName, out IFixture fixture);
+
 		/// <summary>
-		/// Determine if the name &amp; code is correct for this fixture, and
-		/// if they are, generate the correct channel values that will cause
+		/// Generate the correct channel values that will cause
 		/// the fixture to output the desired lighting.
+		/// Note that the byte[] starts at 0, but DMX channels
+		/// start at 1.
 		/// </summary>
 		/// <returns>
-		/// The channel values if the name and code are correct, otherwise null.
+		/// The channel values.
 		/// </returns>
-		/// <param name="fixtureName">Fixture name.</param>
 		/// <param name="colour">Colour code.</param>
-		bool TryGetChannelValues(string fixtureName, ColourCode colour, out byte[] channels);
+		/// <param name="settings">Any additional settings for the given colour code.</param>
+		byte[] GetChannelValues(ColourCode colour, string[] settings);
 	}
 }

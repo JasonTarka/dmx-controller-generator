@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Reflection;
+using System.IO;
 
 namespace dmxcontrollergenerator {
 	class MainClass {
-		private const int RequiredArgs = 3;
+		private const int RequiredArgs = 2;
 
 		public static int Main( string[] args ) {
 			if(args.Length < RequiredArgs) {
@@ -11,12 +11,24 @@ namespace dmxcontrollergenerator {
 				return -1;
 			}
 
-			string fixtureName = args[0],
-				settingsFile = args[1],
-				proFile = args[2];
+			string settingsFile = args[0],
+				proFileDir = args[1];
 
-			using(Processor processor = new Processor(fixtureName, settingsFile, proFile)) {
+			Processor processor = new Processor(settingsFile, proFileDir);
+			try {
 				processor.ProcessFiles();
+			} catch(Exception ex) {
+				if(ex is InvalidDataException
+					|| ex is FileNotFoundException
+				) {
+					// Intended to be shown to the user. No stack trace needed.
+					Console.Error.WriteLine(ex.Message);
+					return -2;
+				}
+
+				Console.Error.WriteLine(ex.Message);
+				Console.Error.WriteLine(ex.StackTrace);
+				return -3;
 			}
 
 			return 0;
@@ -24,7 +36,7 @@ namespace dmxcontrollergenerator {
 
 		private static void ShowUsage() {
 			Console.WriteLine("Expected usage:");
-			Console.WriteLine("dmx-controller-generator {fixture code} {program file} {PRO file}");
+			Console.WriteLine("dmx-controller-generator {program file} {*.PRO file directory}");
 		}
 	}
 }

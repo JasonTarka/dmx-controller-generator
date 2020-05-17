@@ -17,15 +17,18 @@ namespace Fixtures {
 			StrobeMode = 130,
 			SoundActiveMode = 255;
 
-		bool IFixture.TryGetChannelValues(
-			string fixtureName,
-			ColourCode colour,
-			out byte[] channels
-		) {
-			channels = null;
-			if(fixtureName != FixtureName) return false;
+		bool IFixture.TryGetFixture(string fixtureName, out IFixture fixture) {
+			fixture = fixtureName == FixtureName ? this : null;
+			return fixture != null;
+		}
 
-			channels = new byte[Constants.NumChannels + 1];
+		byte[] IFixture.GetChannelValues(
+			ColourCode colour,
+			string[] settings
+		) {
+			// Create with +1 so the channel numberss in code match
+			// what you'd use on a DMX controller. Trim the array later.
+			byte[] channels = new byte[Constants.NumChannels + 1];
 
 			switch(colour) {
 				case ColourCode.SoundActive:
@@ -49,8 +52,7 @@ namespace Fixtures {
 			byte[] corrected = new byte[Constants.NumChannels];
 			Array.Copy(channels, 1, corrected, 0, corrected.Length);
 
-			channels = corrected;
-			return true;
+			return corrected;
 		}
 	}
 }
