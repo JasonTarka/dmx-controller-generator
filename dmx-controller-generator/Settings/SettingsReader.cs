@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Fixtures;
+using dmxcontrollergenerator;
 
-namespace dmxcontrollergenerator {
-	public static class Settings {
+namespace Settings {
+	public static class SettingsReader {
 
 		private const char ColumnDivider = ',';
 		private const char SettingsDivider = '|';
@@ -14,9 +15,6 @@ namespace dmxcontrollergenerator {
 		public static IEnumerable<SettingsLine> ReadSettingsFile(
 			StreamReader settingsFile
 		) {
-			// This method is protected, and a slightly more complicated return than necessary,
-			// to make it much easier to test this part in isolation.
-
 			IFixture[] fixtures = null;
 			const int ignoredHeaders = 2,
 				minHeaders = ignoredHeaders + 1;
@@ -91,75 +89,5 @@ namespace dmxcontrollergenerator {
 			}
 			throw new InvalidDataException($"Invalid fixture name: {fixtureName}");
 		}
-
-		#region Subclasses
-
-		public class SettingsLine {
-			public SettingsLine(
-				byte scene,
-				byte bank,
-				FixtureConfig[] fixtures
-			) {
-				Scene = scene;
-				Bank = bank;
-				Fixtures = fixtures;
-			}
-
-			public byte Scene { get; }
-			public byte Bank { get; }
-			public FixtureConfig[] Fixtures { get; }
-
-			public override bool Equals(object obj) {
-				SettingsLine other = obj as SettingsLine;
-
-				return other != null
-					&& this.ToString() == other.ToString();
-			}
-
-			public override string ToString() {
-				//string fixtureStrings = "";
-				//foreach(FixtureConfig fixture in Fixtures) {
-				//	fixtureStrings += $"\n{fixture.ToString()}";
-				//}
-				string fixtureStrings = string.Join(
-						"\n",
-						Fixtures.Select(
-							x => $"\t{x?.ToString()}"
-						).ToArray()
-					);
-				return $"{{Scene: {Scene}; Bank: {Bank}; Fixtures:\n{fixtureStrings}\n}}";
-			}
-		}
-
-		public class FixtureConfig {
-
-			public FixtureConfig(
-				IFixture fixture,
-				ColourCode colour,
-				string[] settings
-			) {
-				Fixture = fixture;
-				Colour = colour;
-				Settings = settings;
-			}
-
-			public IFixture Fixture { get; }
-			public ColourCode Colour { get; }
-			public string[] Settings { get; }
-
-			public override bool Equals(object obj) {
-				FixtureConfig other = obj as FixtureConfig;
-				return other != null
-					&& this.ToString() == other.ToString();
-			}
-
-			public override string ToString() {
-				string settings = string.Join(", ", Settings);
-
-				return $"{{{Fixture.FixtureName} - {Colour} - [{settings}]}}";
-			}
-		}
-
-		#endregion
 	}
 }

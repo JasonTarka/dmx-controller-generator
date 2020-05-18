@@ -44,10 +44,13 @@
     <Compile Include="Fixtures\SilverParCan.cs" />
     <Compile Include="Fixtures\Jellyfish.cs" />
     <Compile Include="Processor.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Settings\SettingsReader.cs" />
+    <Compile Include="Settings\SettingsLine.cs" />
+    <Compile Include="Settings\FixtureConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fixtures\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

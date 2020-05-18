@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System;
+using Settings;
 
 namespace dmxcontrollergenerator {
 	public class Processor {
@@ -18,7 +20,8 @@ namespace dmxcontrollergenerator {
 		public void ProcessFiles() {
 			using(FileStream settingsFile = new FileStream(m_settingsFilePath, FileMode.Open))
 			using(StreamReader settingsReader = new StreamReader(settingsFile)) {
-				IEnumerable<Settings.SettingsLine> lines = Settings.ReadSettingsFile(settingsReader);
+				Console.WriteLine($"Reading settings file: {m_settingsFilePath}");
+				IEnumerable<SettingsLine> lines = SettingsReader.ReadSettingsFile(settingsReader);
 
 				IEnumerable<SceneBank>[] sceneBanks = ConvertToSceneBanks(lines);
 
@@ -36,12 +39,12 @@ namespace dmxcontrollergenerator {
 		/// </returns>
 		/// <param name="lines">Lines from the settings file.</param>
 		private IEnumerable<SceneBank>[] ConvertToSceneBanks(
-			IEnumerable<Settings.SettingsLine> lines
+			IEnumerable<SettingsLine> lines
 		) {
 			IList<SceneBank>[] sceneBanks = null;
 			int numFixtures = -1;
-			foreach(Settings.SettingsLine line in lines) {
-				Settings.FixtureConfig[] fixtures = line.Fixtures;
+			foreach(SettingsLine line in lines) {
+				FixtureConfig[] fixtures = line.Fixtures;
 				if(sceneBanks == null) {
 					numFixtures = fixtures.Length;
 					sceneBanks = new IList<SceneBank>[numFixtures];
@@ -74,6 +77,8 @@ namespace dmxcontrollergenerator {
 
 			if(!File.Exists(filePath)) throw new FileNotFoundException(
 				$"Cannot open {filePath}: File does not exist!");
+
+			Console.WriteLine($"Updating {filePath}");
 
 			byte[] contents;
 			using(FileStream stream = File.OpenRead(filePath)) {

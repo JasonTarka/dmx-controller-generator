@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Fixtures;
+
 namespace dmxcontrollergenerator {
 	public static class Constants {
 		/// <summary>
