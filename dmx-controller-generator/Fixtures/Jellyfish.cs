@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using dmxcontrollergenerator;
 
 namespace Fixtures {
@@ -43,9 +44,8 @@ namespace Fixtures {
 					break;
 				// TODO: Support strobe & colour modes.
 				default:
-					throw new ArgumentException(
-						colour + " is not supported for " + fixtureName,
-						nameof(colour)
+					throw new InvalidDataException(
+						colour + " is not supported for " + FixtureName
 					);
 			}
 

@@ -37,6 +37,7 @@
       <LogicalName>dmxcontrollertests.ProFileHandlerTests.cs</LogicalName>
     </Compile>
     <Compile Include="SettingsTests.cs" />
+    <Compile Include="Fixtures\AdjMegaParTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dmx-controller-generator\dmx-controller-generator.csproj">
@@ -46,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="testData\" />
+    <Folder Include="Fixtures\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="testData\sixChannelScene">

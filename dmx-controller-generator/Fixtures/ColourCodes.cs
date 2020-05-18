@@ -13,6 +13,7 @@ namespace Fixtures {
 		Orange,
 		Pink,
 		Aqua,
-		SoundActive
+		SoundActive,
+		Macro
 	}
 }

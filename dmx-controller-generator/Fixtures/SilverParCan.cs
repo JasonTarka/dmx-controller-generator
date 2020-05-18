@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using dmxcontrollergenerator;
 
 namespace Fixtures {
@@ -60,9 +61,8 @@ namespace Fixtures {
 					// The relevant channels are already initialized to 0.
 					break;
 				default:
-					throw new ArgumentException(
-						colour + " is not supported for " + fixtureName,
-						nameof(colour)
+					throw new InvalidDataException(
+						colour + " is not supported for " + FixtureName
 					);
 			}
 
