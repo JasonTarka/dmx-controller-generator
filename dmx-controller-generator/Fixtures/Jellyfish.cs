@@ -10,11 +10,13 @@ namespace Fixtures {
 	public class Jellyfish : IFixture {
 		public string FixtureName => "Jellyfish";
 
-		private byte Mode = 1,
+		private const byte
+			Mode = 1,
 			ColourOrChaseMode = 2,
 			Speed = 3; // Only matters in chase and strobe
 
-		private byte ColourChangeMode = 10,
+		private const byte
+			ColourChangeMode = 10,
 			StrobeMode = 130,
 			SoundActiveMode = 255;
 

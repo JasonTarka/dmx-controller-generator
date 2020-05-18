@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Settings {
 	public class SettingsLine {
@@ -19,6 +20,14 @@ namespace Settings {
 		public override bool Equals(object obj) {
 			return obj is SettingsLine other
 				&& this.ToString() == other.ToString();
+		}
+
+		public override int GetHashCode() {
+			var hashCode = 1133551653;
+			hashCode = hashCode * -1521134295 + Scene.GetHashCode();
+			hashCode = hashCode * -1521134295 + Bank.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<FixtureConfig[]>.Default.GetHashCode(Fixtures);
+			return hashCode;
 		}
 
 		public override string ToString() {

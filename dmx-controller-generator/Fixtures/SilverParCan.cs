@@ -10,7 +10,8 @@ namespace Fixtures {
 	/// </summary>
 	public class SilverParCan : IFixture {
 
-		private const byte Dimmer = 1,
+		private const byte
+			Dimmer = 1,
 			Red = 2,
 			Green = 3,
 			Blue = 4;

@@ -8,7 +8,8 @@ namespace Fixtures {
 	/// </summary>
 	public class AdjMegaPar : IFixture {
 
-		const byte Red = 1,
+		private const byte
+			Red = 1,
 			Green = 2,
 			Blue = 3,
 			UV = 4,
@@ -20,11 +21,12 @@ namespace Fixtures {
 		 					  // 16-point blocks
 			SpeedSensitivity = 9;
 
-		const byte SoundActiveMode = 255,
+		private const byte
+			SoundActiveMode = 255,
 			ColourChangeMode = 104,
 			ColourFadeMode = 155;
 
-		const byte On = Constants.MaxVal;
+		private const byte On = Constants.MaxVal;
 
 		public string FixtureName => "adjMegaPar";
 

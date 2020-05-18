@@ -8,8 +8,6 @@ namespace dmxcontrollergenerator {
 		/// </summary>
 		public const int ProFileLength = 0x20200;
 
-		public const string ProFilePattern = "FILE{0}.PRO";
-
 		// These refer to those available on my particular model.
 		// Different models of ADJ DMX Controllers may have different numbers.
 		public const byte MaxFixtures = 12;

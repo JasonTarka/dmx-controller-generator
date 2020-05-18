@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System.IO;
 
 namespace dmxcontrollertests {
-	[TestFixture()]
+	[TestFixture]
 	public class SceneBankTests {
 		[TestCase(1, 1, ExpectedResult = 0x300)]
 		[TestCase(5, 1, ExpectedResult = 0x700)]
