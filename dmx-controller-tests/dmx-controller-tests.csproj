@@ -63,6 +63,12 @@
     <EmbeddedResource Include="testData\settings.csv">
       <LogicalName>testData.settings.csv</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="testData\multiFixture.PRO">
+      <LogicalName>testData.multiFixture.PRO</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testData\multiFixtureScene">
+      <LogicalName>testData.multiFixtureScene</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -47,6 +47,7 @@
     <Compile Include="Settings\SettingsReader.cs" />
     <Compile Include="Settings\SettingsLine.cs" />
     <Compile Include="Settings\FixtureConfig.cs" />
+    <Compile Include="Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fixtures\" />

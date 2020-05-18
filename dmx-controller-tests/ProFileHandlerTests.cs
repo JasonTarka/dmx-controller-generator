@@ -36,7 +36,7 @@ namespace dmxcontrollertests {
 				}
 
 				yield return new SceneBank(scene, bank)
-					.SetChannels(channels);
+					.AddChannels(channels);
 			}
 		}
 

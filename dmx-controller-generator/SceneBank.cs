@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace dmxcontrollergenerator {
 
@@ -20,14 +23,15 @@ namespace dmxcontrollergenerator {
 		private const ushort FIRST_FF_RUN_LENGTH = 0x100;
 		private const ushort SECOND_FF_RUN_LENGTH = 0x80;
 
+		private readonly IList<byte[]> m_channels = new List<byte[]>();
+
 		public byte Scene { get; }
 		public byte Bank { get; }
-		public byte[] Channels { get;  private set; }
 		public ushort Offset { get; }
-		public ushort Checksum { get; private set; }
 
 		/// <summary>
-		/// The number of channels that have been set (are not 0).
+		/// The number of channels that have been set (are not 0)
+		/// for the first fixture.
 		/// </summary>
 		public byte ChannelCount { get; private set; }
 
@@ -38,53 +42,70 @@ namespace dmxcontrollergenerator {
 		}
 
 		/// <summary>
-		/// Sets the channels.
+		/// Append a set of channel values to the scene.
 		/// </summary>
 		/// <returns>This object.</returns>
-		/// <param name="channels">Channels, as a 16-</param>
-		public SceneBank SetChannels(byte[] channels) {
+		/// <param name="channels">Channel values to add.</param>
+		public SceneBank AddChannels(byte[] channels) {
 			// Enforce the 16-channel requirement
-			if(channels.Length != Constants.NumChannels) {
-				throw new ArgumentException(
-					"Channels must have exactly " + NUM_CHANNELS + " elements",
+			if(channels.Length != Constants.NumChannels) throw new ArgumentException(
+					$"Channels must have exactly {NUM_CHANNELS} elements",
 					nameof(channels)
-					);
-			}
+				);
 
-			Channels = channels;
+			// Enforce the max fixture limit
+			if(m_channels.Count >= Constants.MaxFixtures) throw new InvalidDataException(
+				$"A maximum {Constants.MaxFixtures} fixtures are supported.");
 
-			ushort checksum = 0;
-			byte channelsSet = 0;
-			for(ushort i = 0; i < NUM_CHANNELS; i++) {
-				if(channels[i] > 0) {
-					checksum |= (ushort)(1 << i);
-					channelsSet++;
-				}
-			}
-			Checksum = checksum;
-			ChannelCount = channelsSet;
-
+			m_channels.Add(channels);
 			return this;
 		}
 
 		public byte[] GenerateOutput() {
 			byte[] output = new byte[SBANK_SIZE];
 
-			// First byte is a count of channels set to a non-zero value
-			output[0] = ChannelCount;
+			// Fixture channels run as a contiguous block.
+			byte[] channelValues = m_channels.SelectMany(x => x).ToArray();
+
+			// First byte is a count of all channels set to a non-zero value.
+			// Note: The additional loop keeps this method settings bytes in order.
+			output[0] = (byte)channelValues.Count(x => x > 0);
 
 			// Next 16 bytes are the values of the channels
-			for(int i = 1; i <= Channels.Length; i++) {
-				output[i] = Channels[i - 1];
+			for(int i = 0; i < channelValues.Length; i++) {
+				output[1+i] = channelValues[i];
 			}
 
-			// Checksum is some random offset value (who picks 193 bytes?).
-			// Checksum is 2 bytes, but stored in reverse order.
-
-			output[CHECKSUM_OFFSET] = (byte)(0xFF & Checksum);
-			output[CHECKSUM_OFFSET + 1] = (byte)(Checksum >> 8);
+			// Checksums immediately follow the channel values.
+			// If we don't set all fixtures, it's still in the same place.
+			for(int i = 0; i < m_channels.Count; i++) {
+				int index = CHECKSUM_OFFSET + (i * 2);
+				byte[] checksum = GetChecksumBytes(m_channels[i]);
+				output[index] = checksum[0];
+				output[index + 1] = checksum[1];
+			}
 
 			return output;
+		}
+
+		/// <summary>
+		/// Get the checksum bytes for a set of channels.
+		/// The checksum is stored as 2 bytes in reverse order.
+		/// </summary>
+		/// <returns>The checksum bytes.</returns>
+		/// <param name="channels">Channel values to checksum.</param>
+		public static byte[] GetChecksumBytes(byte[] channels) {
+			ushort checksum = 0;
+			for(ushort i = 0; i < NUM_CHANNELS; i++) {
+				if(channels[i] > 0) {
+					checksum |= (ushort)(1 << i);
+				}
+			}
+
+			byte[] bytes = new byte[2];
+			bytes[0] = (byte)(0xFF & checksum);
+			bytes[1] = (byte)(checksum >> 8);
+			return bytes;
 		}
 
 		private ushort DetermineOffset() {

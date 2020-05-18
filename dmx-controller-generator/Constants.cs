@@ -12,6 +12,7 @@ namespace dmxcontrollergenerator {
 
 		// These refer to those available on my particular model.
 		// Different models of ADJ DMX Controllers may have different numbers.
+		public const byte MaxFixtures = 12;
 		public const byte NumChannels = 16;
 		public const byte NumScenes = 8;
 		public const byte NumBanks = 30;

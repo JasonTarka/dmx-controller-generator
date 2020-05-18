@@ -12,9 +12,9 @@ namespace dmxcontrollergenerator {
 			}
 
 			string settingsFile = args[0],
-				proFileDir = args[1];
+				proFilePath = args[1];
 
-			Processor processor = new Processor(settingsFile, proFileDir);
+			Processor processor = new Processor(settingsFile, proFilePath);
 			try {
 				processor.ProcessFiles();
 			} catch(Exception ex) {
@@ -35,8 +35,9 @@ namespace dmxcontrollergenerator {
 		}
 
 		private static void ShowUsage() {
+			string thisFile = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
 			Console.WriteLine("Expected usage:");
-			Console.WriteLine("dmx-controller-generator {program file} {*.PRO file directory}");
+			Console.WriteLine($"{thisFile} {{program file}} {{*.PRO file}}");
 		}
 	}
 }

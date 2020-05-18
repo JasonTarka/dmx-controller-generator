@@ -2,19 +2,20 @@
 using System.IO;
 using System;
 using Settings;
+using System.Linq;
 
 namespace dmxcontrollergenerator {
 	public class Processor {
 
 		private readonly string m_settingsFilePath;
-		private readonly string m_proFileDir;
+		private readonly string m_proFilePath;
 
 		public Processor(
 			string settingsFilePath,
-			string proFileDir
+			string proFilePath
 		) {
 			m_settingsFilePath = settingsFilePath;
-			m_proFileDir = proFileDir;
+			m_proFilePath = proFilePath;
 		}
 
 		public void ProcessFiles() {
@@ -23,69 +24,36 @@ namespace dmxcontrollergenerator {
 				Console.WriteLine($"Reading settings file: {m_settingsFilePath}");
 				IEnumerable<SettingsLine> lines = SettingsReader.ReadSettingsFile(settingsReader);
 
-				IEnumerable<SceneBank>[] sceneBanks = ConvertToSceneBanks(lines);
-
-				for(int i = 0; i < sceneBanks.Length; i++) {
-					UpdateProFile(sceneBanks[i], i);
-				}
+				IEnumerable<SceneBank> sceneBanks = ConvertToSceneBanks(lines);
+				UpdateProFile(sceneBanks);
 			}
 		}
 
-		/// <summary>
-		/// Converts to a list of scene banks per fixture.
-		/// </summary>
-		/// <returns>
-		/// List of scene banks, where each element in the main array corresponds to a fixture number.
-		/// </returns>
-		/// <param name="lines">Lines from the settings file.</param>
-		private IEnumerable<SceneBank>[] ConvertToSceneBanks(
+		private IEnumerable<SceneBank> ConvertToSceneBanks(
 			IEnumerable<SettingsLine> lines
-		) {
-			IList<SceneBank>[] sceneBanks = null;
-			int numFixtures = -1;
-			foreach(SettingsLine line in lines) {
-				FixtureConfig[] fixtures = line.Fixtures;
-				if(sceneBanks == null) {
-					numFixtures = fixtures.Length;
-					sceneBanks = new IList<SceneBank>[numFixtures];
-				}
-
-				for(int i = 0; i < numFixtures; i++) {
-					if(sceneBanks[i] == null)
-						sceneBanks[i] = new List<SceneBank>();
-
-					byte[] channels = fixtures[i].Fixture.GetChannelValues(
-							fixtures[i].Colour,
-							fixtures[i].Settings
-						);
-					SceneBank sBank = new SceneBank(line.Scene, line.Bank)
-						.SetChannels(channels);
-					sceneBanks[i].Add(sBank);
-				}
-			}
-			return sceneBanks;
-		}
+		) => lines.Select(line => {
+				SceneBank sbank = new SceneBank(line.Scene, line.Bank);
+				line.Fixtures.ForEach(fix => {
+					byte[] channels = fix.Fixture.GetChannelValues(fix.Colour, fix.Settings);
+					sbank.AddChannels(channels);
+				});
+				return sbank;
+			});
 
 		private void UpdateProFile(
-			IEnumerable<SceneBank> sceneBanks,
-			int index
+			IEnumerable<SceneBank> sceneBanks
 		) {
-			string filePath = Path.Combine(
-					m_proFileDir,
-					string.Format(Constants.ProFilePattern, index + 1)
-				);
+			if(!File.Exists(m_proFilePath)) throw new FileNotFoundException(
+				$"Cannot open {m_proFilePath}: File does not exist!");
 
-			if(!File.Exists(filePath)) throw new FileNotFoundException(
-				$"Cannot open {filePath}: File does not exist!");
-
-			Console.WriteLine($"Updating {filePath}");
+			Console.WriteLine($"Updating {m_proFilePath}");
 
 			byte[] contents;
-			using(FileStream stream = File.OpenRead(filePath)) {
+			using(FileStream stream = File.OpenRead(m_proFilePath)) {
 				contents = ProFileHandler.GenerateFileContents(sceneBanks, stream);
 			}
 
-			using(BinaryWriter writer = new BinaryWriter(File.OpenWrite(filePath))) {
+			using(BinaryWriter writer = new BinaryWriter(File.OpenWrite(m_proFilePath))) {
 				writer.Write(contents);
 			}
 		}
