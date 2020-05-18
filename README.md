@@ -29,16 +29,20 @@ can then read the modified file and update the scenes for this fixture.
 1. Export a series of fixture files (`FILE#.PRO`) from your DMX controller
 2. Use your favourite spreadsheet software to plan your scenes
 3. Export the scenes to a CSV file of the correct format
-4. Run this program, specifying the fixture code, input file, and the directory
-   containing `*.PRO` files to be modified
+4. Run this program, specifying the fixture code, input file, and the `*.PRO`
+   file to be modified
 
 ```
 $ dmx-controller-generator.exe {fixture code} {settings.csv} {FILE1.PRO}
 ```
 
+A single `*.PRO` file contains channel values for all for all fixtures, for all
+scenes/banks.
+
 ## Settings file format
 
-Very simple format, allowing multiple fixtures to be programmed at once.
+Very simple format, allowing multiple fixtures to be programmed at once. Both
+commas and tabs are supported as separators.
 
 ```csv
 Scene,Bank,fixtureCodeOne,fixtureCodeTwo
@@ -50,13 +54,14 @@ Scene,Bank,fixtureCodeOne,fixtureCodeTwo
 # Comments can only start at the beginning of a line.
 ```
 
+Note: Only the scenes/banks you specify will be modified. Any existing scenes
+that are not included in the settings file will not be modified.
+
 ### Headers
 
 The first non-empty, non-comment line is considered the file header. The first 2
 columns are ignored (but must exist), and each additional column specifies the
 name of the fixture to be programmed (must match a valid fixture code).
-
-The first fixture will modify `FILE1.PRO`, the second `FILE2.PRO`, and so on.
 
 ### Scene & Bank
 

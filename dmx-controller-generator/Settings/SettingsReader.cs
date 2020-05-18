@@ -8,7 +8,7 @@ using dmxcontrollergenerator;
 namespace Settings {
 	public static class SettingsReader {
 
-		private const char ColumnDivider = ',';
+		private static readonly char[] ColumnDividers = { ',', '\t' };
 		private const char SettingsDivider = '|';
 		private const char CommentChar = '#'; // Must be at the beginning of the line.
 
@@ -34,7 +34,7 @@ namespace Settings {
 
 				if(fixtures == null) {
 					// Attempt to parse this as a header line naming the fixtures
-					string[] headers = line.Split(ColumnDivider);
+					string[] headers = line.Split(ColumnDividers);
 					numColumns = headers.Length;
 					if(numColumns < minHeaders) throw new InvalidDataException(
 							"Header line must contain columns for scene, bank, then one or more fixture names"
@@ -49,7 +49,7 @@ namespace Settings {
 				}
 
 				// Split the string into columns
-				string[] columns = line.Split(new char[] { ColumnDivider });
+				string[] columns = line.Split(ColumnDividers);
 				if(columns.Length != numColumns) throw new InvalidDataException(
 					$"Line {lineNum}: Invalid number of columns. Expected: {numColumns}; Actual: {columns.Length}.");
 
