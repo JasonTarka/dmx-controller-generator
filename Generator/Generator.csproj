@@ -35,23 +35,24 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SceneBank.cs" />
-    <Compile Include="ProFileHandler.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Fixtures\IFixture.cs" />
-    <Compile Include="Fixtures\ColourCodes.cs" />
-    <Compile Include="Fixtures\AdjMegaPar.cs" />
-    <Compile Include="Fixtures\SilverParCan.cs" />
-    <Compile Include="Fixtures\Jellyfish.cs" />
-    <Compile Include="Processor.cs" />
-    <Compile Include="Settings\SettingsReader.cs" />
-    <Compile Include="Settings\SettingsLine.cs" />
-    <Compile Include="Settings\FixtureConfig.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Scenes\Fixtures\AdjMegaPar.cs" />
+    <Compile Include="Scenes\Fixtures\ColourCodes.cs" />
+    <Compile Include="Scenes\Fixtures\IFixture.cs" />
+    <Compile Include="Scenes\Fixtures\Jellyfish.cs" />
+    <Compile Include="Scenes\Fixtures\SilverParCan.cs" />
+    <Compile Include="Scenes\Settings\FixtureConfig.cs" />
+    <Compile Include="Scenes\Settings\SettingsLine.cs" />
+    <Compile Include="Scenes\Settings\SettingsReader.cs" />
+    <Compile Include="Scenes\Processor.cs" />
+    <Compile Include="Scenes\ProFileHandler.cs" />
+    <Compile Include="Scenes\SceneBank.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Fixtures\" />
-    <Folder Include="Settings\" />
+    <Folder Include="Scenes\" />
+    <Folder Include="Scenes\Fixtures\" />
+    <Folder Include="Scenes\Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

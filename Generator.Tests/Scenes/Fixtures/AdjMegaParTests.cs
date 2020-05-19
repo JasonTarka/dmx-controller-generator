@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
 
-namespace Fixtures {
+namespace Scenes.Fixtures {
 	[TestFixture]
 	public class AdjMegaParTests {
 

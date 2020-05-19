@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace dmxcontrollergenerator {
+namespace Generator {
 	public static class Extensions {
 
 		public static void ForEach<T>(

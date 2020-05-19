@@ -1,5 +1,5 @@
 ﻿
-namespace Fixtures {
+namespace Scenes.Fixtures {
 
 	/// <summary>
 	/// Colour codes that can be read in and mapped to particular channel-values

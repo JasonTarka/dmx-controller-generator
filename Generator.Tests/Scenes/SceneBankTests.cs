@@ -1,8 +1,8 @@
-﻿using dmxcontrollergenerator;
+﻿using Generator;
 using NUnit.Framework;
 using System.IO;
 
-namespace dmxcontrollertests {
+namespace Scenes {
 	[TestFixture]
 	public class SceneBankTests {
 		[TestCase(1, 1, ExpectedResult = 0x300)]

@@ -1,8 +1,8 @@
 ﻿using System;
-using dmxcontrollergenerator;
 using System.IO;
+using Generator;
 
-namespace Fixtures {
+namespace Scenes.Fixtures {
 	/// <summary>
 	/// ADJ Mega PAR Profile Plus, with UV LED.
 	/// </summary>

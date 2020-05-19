@@ -1,11 +1,10 @@
 ﻿using NUnit.Framework;
 using System.IO;
 using System.Reflection;
-using Fixtures;
+using Scenes.Fixtures;
 using System.Linq;
-using Settings;
 
-namespace Settings {
+namespace Scenes.Settings {
 	[TestFixture]
 	public class SettingsReaderTests {
 

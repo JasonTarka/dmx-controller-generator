@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Fixtures;
+using Scenes.Fixtures;
 
-namespace dmxcontrollergenerator {
+namespace Generator {
 	public static class Constants {
 		/// <summary>
 		/// The total length of a *.PRO file, in bytes.

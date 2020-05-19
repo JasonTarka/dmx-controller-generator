@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Generator;
 
-namespace dmxcontrollergenerator {
+namespace Scenes {
 
 	/// <summary>
 	/// A bank within a scene, where channel values are set, and the points do matter.

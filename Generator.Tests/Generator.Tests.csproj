@@ -32,23 +32,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SceneBankTests.cs" />
-    <Compile Include="ProFileHandlerTests.cs">
+    <Compile Include="Scenes\Fixtures\AdjMegaParTests.cs" />
+    <Compile Include="Scenes\Settings\SettingsReaderTests.cs" />
+    <Compile Include="Scenes\ProFileHandlerTests.cs">
       <LogicalName>dmxcontrollertests.ProFileHandlerTests.cs</LogicalName>
     </Compile>
-    <Compile Include="Fixtures\AdjMegaParTests.cs" />
-    <Compile Include="Settings\SettingsReaderTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\dmx-controller-generator\dmx-controller-generator.csproj">
-      <Project>{F776CC4A-96CA-4068-87FB-43BA232E662E}</Project>
-      <Name>dmx-controller-generator</Name>
-    </ProjectReference>
+    <Compile Include="Scenes\SceneBankTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="testData\" />
-    <Folder Include="Fixtures\" />
-    <Folder Include="Settings\" />
+    <Folder Include="Scenes\" />
+    <Folder Include="Scenes\Fixtures\" />
+    <Folder Include="Scenes\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="testData\sixChannelScene">
@@ -72,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Generator\Generator.csproj">
+      <Project>{F776CC4A-96CA-4068-87FB-43BA232E662E}</Project>
+      <Name>Generator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

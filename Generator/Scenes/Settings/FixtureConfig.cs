@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Fixtures;
+using Scenes.Fixtures;
 
-namespace Settings {
+namespace Scenes.Settings {
 	public class FixtureConfig {
 
 		public FixtureConfig(

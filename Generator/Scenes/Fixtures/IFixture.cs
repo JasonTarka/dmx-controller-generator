@@ -1,5 +1,5 @@
 ﻿
-namespace Fixtures {
+namespace Scenes.Fixtures {
 	public interface IFixture {
 
 		string FixtureName { get; }

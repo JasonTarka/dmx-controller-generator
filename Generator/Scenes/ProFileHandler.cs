@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using Generator;
 
-namespace dmxcontrollergenerator {
+namespace Scenes {
 
 	/// <summary>
 	/// Read from &amp; modify *.PRO files

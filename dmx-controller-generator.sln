@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dmx-controller-generator", "dmx-controller-generator\dmx-controller-generator.csproj", "{F776CC4A-96CA-4068-87FB-43BA232E662E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", "Generator\Generator.csproj", "{F776CC4A-96CA-4068-87FB-43BA232E662E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dmx-controller-tests", "dmx-controller-tests\dmx-controller-tests.csproj", "{FA4D56D5-B53D-4FE9-B766-C08ED3F4B8E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Tests", "Generator.Tests\Generator.Tests.csproj", "{FA4D56D5-B53D-4FE9-B766-C08ED3F4B8E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

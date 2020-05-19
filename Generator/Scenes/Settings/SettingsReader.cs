@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Fixtures;
-using dmxcontrollergenerator;
+using Generator;
+using Scenes.Fixtures;
 
-namespace Settings {
+namespace Scenes.Settings {
 	public static class SettingsReader {
 
 		private static readonly char[] ColumnDividers = { ',', '\t' };

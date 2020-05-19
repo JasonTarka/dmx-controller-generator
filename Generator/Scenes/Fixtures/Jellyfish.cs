@@ -1,22 +1,24 @@
 ﻿using System;
 using System.IO;
-using dmxcontrollergenerator;
+using Generator;
 
-namespace Fixtures {
+namespace Scenes.Fixtures {
 
 	/// <summary>
-	/// A generic LED PAR can we have.
-	/// Doesn't support any special functions, just basic RBG+Dimmer.
+	/// ADJ Jellyfish in basic 3-channel mode.
 	/// </summary>
-	public class SilverParCan : IFixture {
+	public class Jellyfish : IFixture {
+		public string FixtureName => "Jellyfish";
 
 		private const byte
-			Dimmer = 1,
-			Red = 2,
-			Green = 3,
-			Blue = 4;
+			Mode = 1,
+			ColourOrChaseMode = 2,
+			Speed = 3; // Only matters in chase and strobe
 
-		public string FixtureName => "Silver";
+		private const byte
+			ColourChangeMode = 10,
+			StrobeMode = 130,
+			SoundActiveMode = 255;
 
 		bool IFixture.TryGetFixture(string fixtureName, out IFixture fixture) {
 			fixture = fixtureName == FixtureName ? this : null;
@@ -30,37 +32,19 @@ namespace Fixtures {
 			// Create with +1 so the channel numberss in code match
 			// what you'd use on a DMX controller. Trim the array later.
 			byte[] channels = new byte[Constants.NumChannels + 1];
-			const byte on = Constants.MaxVal;
-
-			// Values that are needed in almost every case.
-			channels[Dimmer] = on; // leave it always on, even when dark
 
 			switch(colour) {
-				case ColourCode.Red:
-					channels[Red] = on;
-					break;
-				case ColourCode.Green:
-					channels[Green] = on;
-					break;
-				case ColourCode.Blue:
-					channels[Blue] = on;
-					break;
-				case ColourCode.Orange:
-					channels[Red] = on;
-					channels[Green] = on;
-					break;
-				case ColourCode.Pink:
-					channels[Red] = on;
-					channels[Blue] = on;
-					break;
-				case ColourCode.Aqua:
-					channels[Blue] = on;
-					channels[Green] = on;
+				case ColourCode.SoundActive:
+					channels[Mode] = SoundActiveMode;
+					// TODO: Determine if support for more modes
+					// 		 is required.
+					channels[ColourOrChaseMode] = 0xFF;
 					break;
 				case ColourCode.Off:
 					// Do nothing.
 					// The relevant channels are already initialized to 0.
 					break;
+				// TODO: Support strobe & colour modes.
 				default:
 					throw new InvalidDataException(
 						colour + " is not supported for " + FixtureName

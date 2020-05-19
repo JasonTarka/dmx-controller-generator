@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Settings {
+namespace Scenes.Settings {
 	public class SettingsLine {
 		public SettingsLine(
 			byte scene,

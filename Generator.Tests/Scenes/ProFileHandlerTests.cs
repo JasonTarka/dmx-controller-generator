@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using System.IO;
 using System.Reflection;
-using dmxcontrollergenerator;
 using System.Collections.Generic;
+using Generator;
 
-namespace dmxcontrollertests {
+namespace Scenes {
 	[TestFixture]
 	public class ProFileHandlerTests {
 

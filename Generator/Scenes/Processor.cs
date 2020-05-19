@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System;
-using Settings;
 using System.Linq;
+using Scenes.Settings;
+using Generator;
 
-namespace dmxcontrollergenerator {
+namespace Scenes {
 	public class Processor {
 
 		private readonly string m_settingsFilePath;

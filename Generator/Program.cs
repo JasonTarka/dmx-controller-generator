@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
+using Scenes;
 
-namespace dmxcontrollergenerator {
+namespace Generator {
 	class MainClass {
 		private const int RequiredArgs = 2;
 
