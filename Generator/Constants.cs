@@ -25,5 +25,8 @@ namespace Generator {
 				new SilverParCan(),
 				new Jellyfish()
 			};
+
+		public const byte MaxChases = 6;
+		public const byte MaxScenesPerChase = 240;
 	}
 }

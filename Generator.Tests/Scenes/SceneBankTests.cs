@@ -20,6 +20,16 @@ namespace Scenes {
 			return new SceneBank(scene, bank).Offset;
 		}
 
+		[TestCase(1, 1, ExpectedResult = 0)]
+		[TestCase(1, 2, ExpectedResult = 8)]
+		[TestCase(2, 1, ExpectedResult = 1)]
+		[TestCase(2, 10, ExpectedResult = 73)]
+		[TestCase(7, 3, ExpectedResult = 22)]
+		[TestCase(3, 30, ExpectedResult = 234)]
+		public byte Number(byte scene, byte bank) {
+			return new SceneBank(scene, bank).Number;
+		}
+
 		[TestCase(new byte[] { 112,1,1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, ExpectedResult = new byte[] { 0x07, 0x00 })]
 		[TestCase(new byte[] { 1, 6, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, ExpectedResult = new byte[] { 0x17, 0x00 })]
 		[TestCase(new byte[] { 1, 1, 5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, ExpectedResult = new byte[] { 0x47, 0x84 })]

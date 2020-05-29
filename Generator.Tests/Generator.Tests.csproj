@@ -38,12 +38,14 @@
       <LogicalName>dmxcontrollertests.ProFileHandlerTests.cs</LogicalName>
     </Compile>
     <Compile Include="Scenes\SceneBankTests.cs" />
+    <Compile Include="Chases\ChaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="testData\" />
     <Folder Include="Scenes\" />
     <Folder Include="Scenes\Fixtures\" />
     <Folder Include="Scenes\Settings\" />
+    <Folder Include="Chases\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="testData\sixChannelScene">
@@ -63,6 +65,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="testData\multiFixtureScene">
       <LogicalName>testData.multiFixtureScene</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testData\chaseWithScenes">
+      <LogicalName>testData.chaseWithScenes</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

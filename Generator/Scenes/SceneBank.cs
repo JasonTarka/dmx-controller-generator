@@ -31,6 +31,14 @@ namespace Scenes {
 		public ushort Offset { get; }
 
 		/// <summary>
+		/// The absolute number of this scene, where
+		/// S1B1 is 0, S2B1 is 1, S3B1 is 3, etc.
+		/// </summary>
+		public byte Number {
+			get => (byte)((Bank - 1) * Constants.NumScenes + (Scene - 1));
+		}
+
+		/// <summary>
 		/// The number of channels that have been set (are not 0)
 		/// for the first fixture.
 		/// </summary>
