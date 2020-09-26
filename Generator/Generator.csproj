@@ -49,12 +49,16 @@
     <Compile Include="Scenes\ProFileHandler.cs" />
     <Compile Include="Scenes\SceneBank.cs" />
     <Compile Include="Chases\Chase.cs" />
+    <Compile Include="Chases\Settings\SettingsReader.cs" />
+    <Compile Include="Common\SettingsParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scenes\" />
     <Folder Include="Scenes\Fixtures\" />
     <Folder Include="Scenes\Settings\" />
     <Folder Include="Chases\" />
+    <Folder Include="Chases\Settings\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

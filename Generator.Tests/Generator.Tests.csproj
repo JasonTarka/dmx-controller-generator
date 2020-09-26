@@ -39,6 +39,9 @@
     </Compile>
     <Compile Include="Scenes\SceneBankTests.cs" />
     <Compile Include="Chases\ChaseTests.cs" />
+    <Compile Include="Chases\Settings\SettingsReaderTests.cs">
+      <LogicalName>dmxcontrollertests.Chases.Settings.SettingsReaderTests.cs</LogicalName>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="testData\" />
@@ -46,6 +49,7 @@
     <Folder Include="Scenes\Fixtures\" />
     <Folder Include="Scenes\Settings\" />
     <Folder Include="Chases\" />
+    <Folder Include="Chases\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="testData\sixChannelScene">
@@ -68,6 +72,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="testData\chaseWithScenes">
       <LogicalName>testData.chaseWithScenes</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testData\chaseSettings.csv">
+      <LogicalName>testData.chaseSettings.csv</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

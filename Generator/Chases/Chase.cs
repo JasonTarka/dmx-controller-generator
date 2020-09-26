@@ -42,5 +42,9 @@ namespace Chases {
 			return output;
 		}
 
+		public override bool Equals(object obj) {
+			// TODO: Implement this.
+			return base.Equals(obj);
+		}
 	}
 }
